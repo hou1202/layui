@@ -1,0 +1,92 @@
+@charset "utf-8";
+*, :after, :before{
+    /*box-sizing:	none !important;*/
+}
+.bottom-own {
+    width:100%;
+    color:#ccc;
+    text-align:center;
+    margin-top:100px;
+}
+.main-bottom-own{
+    width:100%;
+    color: #969696;
+    text-align:center;
+}
+
+/*table-thead*/
+.laytable-cell-1-0{ width:50px }
+.laytable-cell-1-id{ width:80px }
+.laytable-cell-1-account{ width:120px }
+.laytable-cell-1-auth_group_name{ width:120px }
+.laytable-cell-1-last_login_time{ width:180px }
+.laytable-cell-1-last_login_ip{ width:180px }
+.laytable-cell-1-create_time{ width:180px }
+.laytable-cell-1-status{ width:70px }
+.laytable-cell-1-8{ width:150px }
+
+/*table*/
+.layui-table-view .layui-table {
+    width:100% !important;
+}
+.layui-input-5, .layui-textarea-5 {
+    width:50% !important;
+}
+.layui-input-7, .layui-textarea-7 {
+    width:70% !important;
+}
+.layui-input-9, .layui-textarea-9 {
+    width:90% !important;
+}
+.layui-list-input-box{
+    margin-top:0 !important;
+
+}
+
+/*分页*/
+.pagination{
+    margin:0 !important;
+}
+.pagination li{
+    float:left;
+}
+.pagination>.active>span{
+    background-color:#009688;
+    border-color:#009688;
+}
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover{
+    background-color:#009688;
+    border-color:#009688;
+    color:#fff;
+}
+/**/
+.logout-button{
+    border:none;
+    background:none;
+}
+
+/*自定义table样式*/
+.layui-table-custom {
+    text-align:center;
+    table-layout: fixed;
+}
+.layui-table-custom thead ,.layui-table-custom thead tr ,.layui-table-custom thead tr th {
+    text-align:center !important;
+    height:40px !important;
+}
+.layui-tbody td{
+    line-height:30px ;
+}
+.layui-table-custom td{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.layui-body-cell-0{  width:150px !important;  }
+.layui-body-cell-4{  min-width:40px !important;  }
+.layui-body-cell-5{  min-width:150px !important;  }
