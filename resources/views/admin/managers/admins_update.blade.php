@@ -18,7 +18,7 @@
         <legend>编辑管理员</legend>
     </fieldset>
 
-    <form class="layui-form" action="{{ route('admins.store') }}" method="post" id="form_id">
+    <form class="layui-form" action="{{ route('admins.update',$admin->id) }}" method="post" id="form_id">
         {{ @method_field('PATCH') }}
         {{ @csrf_field() }}
 
@@ -32,7 +32,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">登录密码</label>
             <div class="layui-input-block">
-                <input type="password" id="oldPwd" name="password" lay-verify="required|pass" placeholder="******" autocomplete="off" class="layui-input layui-input-5" >
+                <input type="password" id="pwd"  lay-verify="pass" placeholder="******" autocomplete="off" class="layui-input layui-input-5" >
             </div>
         </div>
 
@@ -70,7 +70,7 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="managers">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="admins">立即提交</button>
             </div>
         </div>
 
@@ -87,6 +87,7 @@
         layui.use(['form', 'layedit',], function(){
             var form = layui.form
                 ,layer = layui.layer;
+            var $ = jQuery = layui.$;
 
 
             //自定义验证规则
@@ -97,8 +98,14 @@
                         return '登录帐户不得少于5个字符';
                     }
                 }
-                ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-                ,confirm: [/(.+){6,12}$/, '密码不一致']
+                ,pass:function(value){
+                    if(value.length >= 1){
+                        if(value.length < 2 || value.length >12){
+                            return '密码必须6到12位';
+                        }
+                    }
+
+                }
                 ,name:function(value){
                     if(value.length > 5 || value.length < 2) {
                         return '真实姓名信息有误';
@@ -114,11 +121,18 @@
             });
 
             //监听提交
-            form.on('submit(managers)', function(data){
+            form.on('submit(admins)', function(data){
 
             });
 
-
+            $("#pwd").blur(function(){
+               //console.log($(this).val())
+                if($(this).val()){
+                   $(this).attr('name','password');
+                }else{
+                    $(this).attr('name','');
+                }
+            });
 
 
             //提交错误返回提示信息
