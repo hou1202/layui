@@ -57,7 +57,7 @@
                     <li class="layui-nav-item  layui-nav-itemed">
                         <a href="javascript:;"><i class="layui-icon">&#xe620;</i>管理设置</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" href-url="{{ route( 'managers.index' ) }}"><i class="layui-icon">&#xe621;</i>管理员管理</a></dd>
+                            <dd><a href="javascript:;" href-url="{{ route( 'admins.index' ) }}"><i class="layui-icon">&#xe621;</i>管理员管理</a></dd>
                             <dd><a href="javascript:;" href-url="{{ route( 'permissions.index' ) }}"><i class="layui-icon">&#xe621;</i>权限管理</a></dd>
                             <dd><a href="javascript:;" href-url="{{ route( 'roles.index' ) }}"><i class="layui-icon">&#xe621;</i>角色管理</a></dd>
                             <dd><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe621;</i>表单</a></dd>

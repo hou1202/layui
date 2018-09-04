@@ -6,6 +6,14 @@
 
 @section('content')
 
+    <!-- 工具集 -->
+    <div class="my-btn-box">
+        <span class="fl">
+            <a class="layui-btn layui-btn-small"  href="javascript:history.back(-1)"><i class="layui-icon">&#xe65c;</i></a>
+            <a class="layui-btn layui-btn-small "  href="javascript:location.reload();"><i class="layui-icon">&#x1002;</i></a>
+        </span>
+    </div>
+
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
         <legend>添加管理员角色</legend>
     </fieldset>
@@ -84,7 +92,8 @@
            /* form.on('submit(roles)', function(data){
                 layer.alert(data);
             });
-*/
+            */
+
 
             /*
             * checked 一级目录监听
@@ -117,9 +126,6 @@
 
                }
             });
-
-
-
 
             //提交错误返回提示信息
             @if ($errors->any())

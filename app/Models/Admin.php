@@ -19,10 +19,10 @@ class Admin extends Authenticatable
     /**
      *定义允许批量写入的字段
      *
-     *@var array
+     * @var array
      */
     protected $fillable = [
-        'account','password','name','status','role','last_ip','last_at','log_count','remarks'
+        'account', 'password', 'name', 'status', 'role_id', 'last_ip', 'last_at', 'log_count', 'remarks'
     ];
 
     /**
@@ -31,7 +31,15 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password', 'remember_token'
     ];
 
+
+    /*public function role()
+    {
+        return $this -> hasOne(Role::class,'role_id');
+    }*/
 }
+
+
+

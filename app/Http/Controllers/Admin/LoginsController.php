@@ -6,8 +6,8 @@ use App\Http\Requests\LoginValidate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Closure;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\Admin;
 
 class LoginsController extends Controller

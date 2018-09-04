@@ -121,7 +121,7 @@
                         layer.msg(data.msg);
                         setTimeout(function(){
                             location.reload();
-                        },2500);
+                        },2000);
                     },
                     error:function(){
                         layer.msg('网络错误')

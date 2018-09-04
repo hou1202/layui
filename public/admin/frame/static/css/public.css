@@ -88,5 +88,6 @@
     text-overflow: ellipsis !important;
 }
 .layui-body-cell-0{  width:150px !important;  }
+.layui-body-cell-3{  width:200px !important;  }
 .layui-body-cell-4{  min-width:40px !important;  }
 .layui-body-cell-5{  min-width:150px !important;  }

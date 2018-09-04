@@ -27,8 +27,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth.admin'],function(){
     Route::get('main','admin\MainsController@index')->name('admin.main');
     Route::get('welcome','admin\MainsController@welcome')->name('admin.welcome');
     //管理员管理Route
-    Route::resource('managers','admin\ManagersController',['except'=>['show']]);
-    Route::post('/managers/status','admin\ManagersController@status')->name('managers.status');
+    Route::resource('admins','admin\AdminsController');
+    Route::post('/admins/status','admin\AdminsController@status')->name('admins.status');
     //角色管理Route
     Route::resource('roles','admin\RolesController');
     //权限管理Route

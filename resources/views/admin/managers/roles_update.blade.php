@@ -6,18 +6,27 @@
 
 @section('content')
 
+    <!-- 工具集 -->
+    <div class="my-btn-box">
+        <span class="fl">
+            <a class="layui-btn layui-btn-small"  href="javascript:history.back(-1)"><i class="layui-icon">&#xe65c;</i></a>
+            <a class="layui-btn layui-btn-small "  href="javascript:location.reload();"><i class="layui-icon">&#x1002;</i></a>
+        </span>
+    </div>
+
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>添加管理员角色</legend>
+        <legend>编辑管理员角色</legend>
     </fieldset>
 
-    <form class="layui-form" action="{{ route('roles.store') }}" method="post" id="form_id">
+    <form class="layui-form" action="{{ route('roles.update',$role->id) }}" method="post" id="form_id">
 
         {{ @csrf_field() }}
+        {{ @method_field('PATCH') }}
 
         <div class="layui-form-item">
             <label class="layui-form-label">角色名称</label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required|title" placeholder="角色名称" autocomplete="off" class="layui-input layui-input-5" value="{{ $roles->name }}" >
+                <input type="text" name="name" lay-verify="required|title" placeholder="角色名称" autocomplete="off" class="layui-input layui-input-5" value="{{ $role->name }}" >
             </div>
         </div>
 
@@ -28,11 +37,11 @@
                     @if($permission->is_menu)
                         <div>
                             <div class="main-check">
-                                <input type="checkbox" class="main-input" lay-filter="main-input" name="per_id[]" lay-skin="primary" value="{{ $permission -> id }}" title="{{ $permission -> title }}" checked="">
+                                <input type="checkbox" class="main-input" lay-filter="main-input" name="per_id[]" lay-skin="primary" value="{{ $permission -> id }}" title="{{ $permission -> title }}" @if(in_array($permission->id,$role->per_id))checked="checked"@endif>
                             </div>
                             @foreach($permissions as $per)
                                 @if($per ->type_id == $permission->id)
-                                    <input type="checkbox" class="child-input" lay-filter="child-input" name="per_id[]" lay-skin="primary" value="{{ $per -> id }}" title="{{ $per -> title }}" checked="">
+                                    <input type="checkbox" class="child-input" lay-filter="child-input" name="per_id[]" lay-skin="primary" value="{{ $per -> id }}" title="{{ $per -> title }}" @if(in_array($per->id,$role->per_id))checked="checked"@endif>
                                 @endif
                             @endforeach
                             <hr/>
@@ -49,7 +58,7 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="managers">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="roles">立即提交</button>
             </div>
         </div>
 
@@ -128,17 +137,7 @@
                     @endforeach
                     @endif
 
-            var tog = false;
-            /*  $('.main-check').on('click',function(){
-                  //console.log(1234);
-                  //$(this.input).attr('checked','checked');
-                  //if($(this.input))
-                  //console.log($(this).children('input'));
-                  $(this).siblings('div').addClass('layui-form-checked');
-                  $(this).siblings("input[type=checkbox]").attr("checked",tog);
-                  tog = !tog;
 
-              })*/
 
 
         });

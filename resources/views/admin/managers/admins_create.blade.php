@@ -6,11 +6,19 @@
 
 @section('content')
 
+    <!-- 工具集 -->
+    <div class="my-btn-box">
+        <span class="fl">
+            <a class="layui-btn layui-btn-small"  href="javascript:history.back(-1)"><i class="layui-icon">&#xe65c;</i></a>
+            <a class="layui-btn layui-btn-small "  href="javascript:location.reload();"><i class="layui-icon">&#x1002;</i></a>
+        </span>
+    </div>
+
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
         <legend>添加管理员</legend>
     </fieldset>
 
-    <form class="layui-form" action="{{ route('managers.store') }}" method="post" id="form_id">
+    <form class="layui-form" action="{{ route('admins.store') }}" method="post" id="form_id">
 
         {{ @csrf_field() }}
 
@@ -46,12 +54,9 @@
             <label class="layui-form-label">所属权限</label>
             <div class="layui-input-block">
                 <select name="role_id" lay-verify="role">
-                    <option value=""></option>
-                    <option value="0" >超级管理员</option>
-                    <option value="1" >商品管理员</option>
-                    <option value="2">订单管理员</option>
-                    <option value="3">财务管理员</option>
-                    <option value="4" selected="">普通管理员</option>
+                    @foreach($roles as $role)
+                    <option value="{{ $role->id }}" >{{ $role->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -72,7 +77,7 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="managers">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="admins">立即提交</button>
             </div>
         </div>
 
@@ -88,8 +93,7 @@
     <script>
         layui.use(['form', 'layedit',], function(){
             var form = layui.form
-                ,layer = layui.layer
-                ,layedit = layui.layedit
+                ,layer = layui.layer;
 
 
             //自定义验证规则
@@ -117,28 +121,11 @@
             });
 
             //监听提交
-            form.on('submit(managers)', function(data){
-
-                /*layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                });
-
-                return false;*/
-               /* $.ajax({
-                    url:"{{ route('managers.store') }}",
-                    type:"POST",
-                    dataType: "json",
-                    data:$('#form_id').serialize(),
-                    success:function(data){
-                        jsonAlertAutoClose(data);
-                    },
-                    error:function () {
-                        showAlertAutoClose("网络错误，请重试...");
-                    }
-                });*/
-
+            form.on('submit(admins)', function(data){
 
             });
+
+
 
 
             //提交错误返回提示信息

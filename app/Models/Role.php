@@ -19,4 +19,9 @@ class Role extends Model
     protected $fillable = [
         'name','per_id'
     ];
+
+    public function admins()
+    {
+        $this -> belongsToMany(Admin::class);
+    }
 }
