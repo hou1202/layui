@@ -54,47 +54,21 @@
             <div class="layui-side-scroll">
                 <!-- 左侧主菜单添加选项卡监听 -->
                 <ul class="layui-nav layui-nav-tree" lay-filter="side-main">
-                    <li class="layui-nav-item  layui-nav-itemed">
-                        <a href="javascript:;"><i class="layui-icon">&#xe620;</i>管理设置</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" href-url="{{ route( 'admins.index' ) }}"><i class="layui-icon">&#xe621;</i>管理员管理</a></dd>
-                            <dd><a href="javascript:;" href-url="{{ route( 'permissions.index' ) }}"><i class="layui-icon">&#xe621;</i>权限管理</a></dd>
-                            <dd><a href="javascript:;" href-url="{{ route( 'roles.index' ) }}"><i class="layui-icon">&#xe621;</i>角色管理</a></dd>
-                            <dd><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe621;</i>表单</a></dd>
-                        </dl>
-                    </li>
+                    @foreach($navs as $nav)
+                        @if($nav->is_menu)
+                            <li class="layui-nav-item  layui-nav-itemed">
+                                <a href="javascript:;"><i class="layui-icon">&{{ $nav->icon }};</i>{{ $nav -> title }}</a>
+                                <dl class="layui-nav-child">
+                                    @foreach($navs as $child)
+                                        @if($nav->id == $child ->type_id)
+                                            <dd><a href="javascript:;" href-url="{{ route( $child->route ) }}"><i class="layui-icon">&{{ $child->icon }};</i>{{ $child->title }}</a></dd>
+                                        @endif
+                                    @endforeach
+                                </dl>
+                            </li>
+                        @endif
+                    @endforeach
 
-                    <li class="layui-nav-item  layui-nav-itemed">
-                        <a href="javascript:;"><i class="layui-icon">&#xe620;</i>基础</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe621;</i>按钮</a></dd>
-                            <dd><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe621;</i>表单</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item  layui-nav-itemed">
-                        <a href="javascript:;"><i class="layui-icon">&#xe620;</i>设置</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe621;</i>按钮</a></dd>
-                            <dd><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe621;</i>表单</a></dd>
-                         </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;"><i class="layui-icon">&#xe628;</i>扩展</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>
-                            <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe621;</i>注册页</a></dd>
-                       </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" href-url="demo/user.html"><i class="layui-icon">&#xe628;</i>用户管理</a>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;"><i class="layui-icon">&#xe628;</i>用户管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" href-url="demo/user.html"><i class="layui-icon">&#xe621;</i>用户管理页</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item"><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ad6ba602ae228be2222ddb804086e0cfa42da3d74e34b383b665c2bec1adfc6e"><i class="layui-icon">&#xe61e;</i>加入群下载源码</a></li>
                 </ul>
 
             </div>
@@ -150,7 +124,7 @@
             // 顶部左侧菜单生成 [请求地址,过滤ID,是否展开,携带参数]
             vipNav.top_left('/admin/json/nav_top_left.json','side-top-left',false);
             // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-            vipNav.main('/admin/json/nav_main.json','side-main',true);
+            vipNav.main('/admin/json/nav_main.json','side-main',false);
 
             // you code ...
 

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class MainsController extends Controller
 {
@@ -12,7 +15,11 @@ class MainsController extends Controller
 
     public function index()
     {
-        return view('admin.mains.main');
+        $roles = Role::where('id',Auth::guard('admin')->User()->role_id)->first();
+        $roleArr = explode('|',$roles->per_id);
+
+        $navs = Permission::whereIn('id',$roleArr)->get();
+        return view('admin.mains.main',compact('navs'));
     }
 
     public function welcome()

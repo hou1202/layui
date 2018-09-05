@@ -32,7 +32,7 @@
                     <th>导航名称</th>
                     <th>导航路由</th>
                     <th>是否主目录</th>
-                    <th>父级目录</th>
+                    <th>父级目录ID</th>
                     <th>导航图标</th>
                     <th>创建时间</th>
                     <th class="layui-body-cell-0">操作</th>
@@ -44,7 +44,7 @@
                     <td class="layui-body-cell-4">{{ $permission->id }}</td>
                     <td>{{ $permission->title }}</td>
                     <td>{{ $permission->route }}</td>
-                    <td>{{ $permission->is_menu }}</td>
+                    <td>{{ $permission->is_menu ? '是' : '否'}}</td>
                     <td>{{ $permission->type_id }}</td>
                     <td>{{ $permission->icon }}</td>
                     <td>{{ $permission->created_at }}</td>

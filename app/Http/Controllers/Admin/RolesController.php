@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
@@ -70,6 +71,9 @@ class RolesController extends Controller
 
     public function destroy(Role $role)
     {
+        if(Admin::where('role_id',$role->id)->first()){
+            return response()->json(['msg'=>'该角色有下属管理员，请先移除管理员']);
+        }
         $resource = $role ->delete();
         return $resource ? response()->json(['msg'=>'角色删除成功']) : response()->json(['msg'=>'角色删除失败']);
     }

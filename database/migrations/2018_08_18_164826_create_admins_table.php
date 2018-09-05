@@ -23,6 +23,7 @@ class CreateAdminsTable extends Migration
                 $table->string('name') -> comment('真实姓名');
                 $table->tinyInteger('status') ->nullable(true) -> comment('帐户状态');
                 $table->tinyInteger('role_id') ->default(0) -> comment('权限组');
+                $table->tinyInteger('is_super') ->default(0) -> comment('是否是超级管理员');
                 $table->ipAddress('last_ip') -> nullable(true) -> comment('最后登录IP地址');
                 $table->dateTime('last_at') -> nullable(true) -> comment('最后登录时间');
                 $table->integer('log_count') ->default(0) -> comment('登录总次数');

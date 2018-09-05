@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\LoginValidate;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -58,6 +58,10 @@ class LoginsController extends Controller
         ]);
 
         if(Auth::guard('admin')->attempt($credentials)){
+            if(!Auth::guard('admin')->User()->status){
+                Auth::guard('admin')->logout();
+                return back()->withErrors('该用户已被禁用');
+            }
             $data = [];
             $data['last_ip'] = $request -> ip();
             $data['last_at'] = date('Y-m-d H:i:s');

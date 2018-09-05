@@ -57,7 +57,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">帐户状态</label>
             <div class="layui-input-block">
-                <input type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="switchTest" lay-text="开启|禁用" value="1">
+                <input type="checkbox" @if($admin->status) checked="" @endif  name="status" lay-skin="switch" lay-filter="switchTest" lay-text="开启|禁用" value="1">
             </div>
         </div>
 
@@ -84,7 +84,7 @@
 
 
     <script>
-        layui.use(['form', 'layedit',], function(){
+        layui.use(['form'], function(){
             var form = layui.form
                 ,layer = layui.layer;
             var $ = jQuery = layui.$;
@@ -100,8 +100,8 @@
                 }
                 ,pass:function(value){
                     if(value.length >= 1){
-                        if(value.length < 2 || value.length >12){
-                            return '密码必须6到12位';
+                        if(value.length < 6 || value.length >15){
+                            return '密码必须6到15位';
                         }
                     }
 
@@ -126,7 +126,6 @@
             });
 
             $("#pwd").blur(function(){
-               //console.log($(this).val())
                 if($(this).val()){
                    $(this).attr('name','password');
                 }else{
@@ -134,13 +133,6 @@
                 }
             });
 
-
-            //提交错误返回提示信息
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    layer.msg("{{ $error }}");
-                @endforeach
-            @endif
 
 
         });

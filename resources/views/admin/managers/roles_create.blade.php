@@ -127,14 +127,6 @@
                }
             });
 
-            //提交错误返回提示信息
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    layer.msg("{{ $error }}");
-            @endforeach
-            @endif
-
-
         });
 
 

@@ -44,13 +44,19 @@
                 <tr>
                     <td class="layui-body-cell-4">{{ $admin->id }}</td>
                     <td>{{ $admin->account }}</td>
-                    <td>{{ $admin->role_id }}</td>
+                    <td>{{ $admin->role_name }}</td>
                     <td>
+                        @if($admin->is_super || $admin->id == Auth::guard('admin')->User()->id)
+                            <div class="layui-unselect layui-form-switch layui-form-onswitch" >
+                                <i></i>
+                            </div>
+                        @else
                         <input type="hidden" value="{{ $admin->status }}" name="status" />
                         <input type="hidden" value="{{ $admin->id }}" name="id" />
-                        <div class="layui-unselect layui-form-switch @if($admin->status != Null) layui-form-onswitch @endif " >
+                        <div class="layui_status layui-unselect layui-form-switch @if($admin->status != Null) layui-form-onswitch @endif " >
                             <i></i>
                         </div>
+                        @endif
                     </td>
                     <td>{{ $admin->last_at }}</td>
                     <td>{{ $admin->last_ip }}</td>
@@ -60,12 +66,16 @@
                             <a class="layui-btn layui-btn-mini" lay-event="detail" href="{{ route('admins.show',$admin->id) }}">
                                 <i class="layui-icon">&#xe628;</i>查看
                             </a>
-                            <a class="layui-btn layui-btn-mini layui-btn-normal layui-edit"  lay-event="edit" href="{{ route('admins.edit',$admin->id) }}">
-                                <i class="layui-icon">&#xe642;</i>编辑
-                            </a>
-                            <a class="layui-btn layui-btn-mini layui-btn-danger layui-del"  lay-event="del" name="{{ $admin->id }}">
-                                <i class="layui-icon">&#xe640;</i>删除
-                            </a>
+                            @if(!$admin->is_super && !Auth::guard('admin')->User()->is_super ||Auth::guard('admin')->User()->is_super)
+                                <a class="layui-btn layui-btn-mini layui-btn-normal layui-edit"  lay-event="edit" href="{{ route('admins.edit',$admin->id) }}">
+                                    <i class="layui-icon">&#xe642;</i>编辑
+                                </a>
+                            @endif
+                            @if(!$admin->is_super && $admin->id != Auth::guard('admin')->User()->id)
+                                <a class="layui-btn layui-btn-mini layui-btn-danger layui-del"  lay-event="del" name="{{ $admin->id }}">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                </a>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -114,7 +124,7 @@
             });
             // you code ...
             //更新管理员状态
-            $('.layui-unselect').on('click',function(){
+            $('.layui_status').on('click',function(){
                 var id = $(this).prev().val();
                 var status = $(this).prev().prev().val();
 
@@ -159,7 +169,11 @@
                 });
             });
 
+
+
+
         });
+
     </script>
 
 @stop
