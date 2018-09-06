@@ -51,11 +51,11 @@
                                 <i></i>
                             </div>
                         @else
-                        <input type="hidden" value="{{ $admin->status }}" name="status" />
-                        <input type="hidden" value="{{ $admin->id }}" name="id" />
-                        <div class="layui_status layui-unselect layui-form-switch @if($admin->status != Null) layui-form-onswitch @endif " >
-                            <i></i>
-                        </div>
+                            <input type="hidden" value="{{ $admin->status }}" name="status" />
+                            <input type="hidden" value="{{ $admin->id }}" name="id" />
+                            <div class="layui_status layui-unselect layui-form-switch @if($admin->status != Null) layui-form-onswitch @endif " >
+                                <i></i>
+                            </div>
                         @endif
                     </td>
                     <td>{{ $admin->last_at }}</td>

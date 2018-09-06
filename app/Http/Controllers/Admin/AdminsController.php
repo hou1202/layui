@@ -16,6 +16,8 @@ class AdminsController extends Controller
     //管理员管理展示页面
     public function index()
     {
+        /*var_dump(request()->url());
+        var_dump(request()->route()->uri);die;*/
         $admins = Admin::join('roles as r','admins.role_id','=','r.id','left')
                 ->select('admins.*','r.name as role_name')
                 ->paginate(10);
@@ -127,6 +129,10 @@ class AdminsController extends Controller
         if(isset($result['password'])){
             $result['password'] = bcrypt($result['password']);
         }
+        if(!isset($result['status']) || empty($result['status'])){
+            $result['status'] = null;
+        }
+        //var_dump($result);die;
         $resource = $admin ->update($result);
         return $resource ? redirect()->route('admins.index') : back()->withErrors(['管理员帐户更新失败']);
     }

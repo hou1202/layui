@@ -46,9 +46,14 @@
         <div class="layui-form-item layui-input-5">
             <label class="layui-form-label">所属权限</label>
             <div class="layui-input-block">
-                <select name="role_id" lay-verify="role">
+                <select name="role_id" lay-verify="role" >
                     @foreach($roles as $role)
-                        <option value="{{ $role->id }}" @if($admin->role_id == $role->id) selected @endif>{{ $role->name }}</option>
+                        @if($admin -> is_super && $role->id == $admin->role_id)
+                            <option value="{{ $role->id }}" @if($admin->role_id == $role->id) selected @endif>{{ $role->name }}</option>
+                            @break
+                        @else
+                            <option value="{{ $role->id }}" @if($admin->role_id == $role->id) selected @endif>{{ $role->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -57,7 +62,15 @@
         <div class="layui-form-item">
             <label class="layui-form-label">帐户状态</label>
             <div class="layui-input-block">
-                <input type="checkbox" @if($admin->status) checked="" @endif  name="status" lay-skin="switch" lay-filter="switchTest" lay-text="开启|禁用" value="1">
+                @if($admin->is_super)
+                    <div class="layui-unselect layui-form-switch layui-form-onswitch" >
+                        <i></i>
+                        <input type="hidden"   name="status"  value="1" >
+                    </div>
+                @else
+                    <input type="checkbox" @if($admin->status) checked="" @endif  name="status" lay-skin="switch" lay-filter="switchTest" lay-text="开启|禁用" value="1" >
+                @endif
+
             </div>
         </div>
 

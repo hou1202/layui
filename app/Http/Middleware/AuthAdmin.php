@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Permission;
+use App\Models\Role;
 
 class AuthAdmin
 {
@@ -22,6 +24,14 @@ class AuthAdmin
                 return redirect()->guest('admin/login');
            }
         }
+
+        $roles = Role::where('id',auth()->guard('admin')->User()->role_id)->first();
+        $roleArr = explode('|',$roles['per_id']);
+        $permissions = Permission::get()->toArray();
+        //访问请求Route
+        $requestRoute = $request -> url ();
+        /*var_dump($requestRoute);
+        var_dump(route($permissions[1]['route']));die;*/
 
         return $next($request);
     }
