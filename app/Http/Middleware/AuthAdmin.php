@@ -25,11 +25,11 @@ class AuthAdmin
            }
         }
 
-        $roles = Role::where('id',auth()->guard('admin')->User()->role_id)->first();
+        /*$roles = Role::where('id',auth()->guard('admin')->User()->role_id)->first();
         $roleArr = explode('|',$roles['per_id']);
         $permissions = Permission::get()->toArray();
         //访问请求Route
-        $requestRoute = $request -> url ();
+        $requestRoute = $request -> url ();*/
         /*var_dump($requestRoute);
         var_dump(route($permissions[1]['route']));die;*/
 
